@@ -7,9 +7,12 @@ public class App {
         int firstNumber = getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
         int secondNumber = getNonNegativeInteger(scanner, "두 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
 
+        //  isValidOperator를 통해 Scanner를 사용하여 사용자로부터 세번째 입력을 받고 입력값 유효성검사 실시
+        char applyOperator = isValidOperator(scanner, "사칙연산 기호를 입력하세요(+, -, *, /):");
+        scanner.close();
     }
 
-    // 입력값 유효성검사후 반환하는 메서드
+    // 피연산자 입력값 유효성검사후 반환하는 메서드
     private static int getNonNegativeInteger(Scanner scanner, String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -33,11 +36,22 @@ public class App {
                 // 양의 정수 또는 0일 경우 반복문 탈출
                 return number;
             } catch (NumberFormatException e) {
-                System.out.println("올바르지 않는 입력입니다. 다시 입력해주세요:");
+                System.out.println("정수 형태로 입력해주세요:");
             }
         }
     }
 
+    // 연산자 입력값 유효성검사후 반환하는 메서드
+    public static char isValidOperator(Scanner scanner, String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty() && input.length() == 1 && "+-*/".indexOf(input.charAt(0)) != -1) {
+                return input.charAt(0);  // 유효한 연산자가 입력된 경우, 해당 연산자 반환
+            }
+            System.out.println("사칙연산자만 입력 가능합니다(+, -, *, /). 다시 입력해주세요: ");
+        }
+    }
 
 
 }
