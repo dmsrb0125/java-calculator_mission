@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        double[] resultArray =  new double[10]; // 연산 결과 10개를 저장할 수 있는 배열 선언 및 생성
+        int count =0; // 연산의 결과를 비어있는 곳에 저장하기 위해 저장할 때마다 count 합니다.
         while (true){
             // getNonNegativeInteger를 통해 Scanner를 사용하여 사용자로부터 첫번째, 두번째 입력을 받고 입력값 유효성 검사 실시
             int firstNumber = getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
@@ -20,6 +21,8 @@ public class App {
             if ("exit".equals(continueInput)) {
                 break;
             }
+            resultArray[count] = result;
+            count += 1;
         }
         scanner.close();
 
