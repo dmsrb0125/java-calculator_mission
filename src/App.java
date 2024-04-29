@@ -3,15 +3,26 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // getNonNegativeInteger를 통해 Scanner를 사용하여 사용자로부터 첫번째, 두번째 입력을 받고 입력값 유효성 검사 실시
-        int firstNumber = getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
-        int secondNumber = getNonNegativeInteger(scanner, "두 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
 
-        //  isValidOperator를 통해 Scanner를 사용하여 사용자로부터 세번째 입력을 받고 입력값 유효성검사 실시
-        char applyOperator = isValidOperator(scanner, "사칙연산 기호를 입력하세요(+, -, *, /):");
+        while (true){
+            // getNonNegativeInteger를 통해 Scanner를 사용하여 사용자로부터 첫번째, 두번째 입력을 받고 입력값 유효성 검사 실시
+            int firstNumber = getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
+            int secondNumber = getNonNegativeInteger(scanner, "두 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
+
+            // isValidOperator를 통해 Scanner를 사용하여 사용자로부터 세번째 입력을 받고 입력값 유효성검사 실시
+            char applyOperator = isValidOperator(scanner, "사칙연산 기호를 입력하세요(+, -, *, /):");
+            double result = calculate(firstNumber,secondNumber,applyOperator);
+            System.out.println("결과: " + result);
+
+            // exit 입력 시 종료, 다른입력시 계산 무한 반복진행
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료), 다른키 누를시 계산 진행");
+            String continueInput= scanner.nextLine();
+            if ("exit".equals(continueInput)) {
+                break;
+            }
+        }
         scanner.close();
-        double result = calculate(firstNumber,secondNumber,applyOperator);
-        System.out.println("결과: " + result);
+
 
     }
 
