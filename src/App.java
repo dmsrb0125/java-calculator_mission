@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        double[] resultArray =  new double[10]; // 연산 결과 10개를 저장할 수 있는 배열 선언 및 생성
-        int count =0; // 연산의 결과를 비어있는 곳에 저장하기 위해 저장할 때마다 count 합니다.
+        ArrayList<Double> resultArray = new ArrayList<Double>(); // 연산 결과가 10개로 고정되지 않고 무한이 저장될
         while (true){
             // getNonNegativeInteger를 통해 Scanner를 사용하여 사용자로부터 첫번째, 두번째 입력을 받고 입력값 유효성 검사 실시
             int firstNumber = getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
@@ -15,22 +15,23 @@ public class App {
             double result = calculate(firstNumber,secondNumber,applyOperator);
             System.out.println("결과: " + result);
 
+            // remove 입력시  가장 먼저 저장된 결과가 삭제, 다른입력시 넘어감
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
+            String removeInput= scanner.nextLine();
+            if ("remove".equals(removeInput)) {
+                resultArray.remove(0);
+            }
+
             // exit 입력 시 종료, 다른입력시 계산 무한 반복진행
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료), 다른키 누를시 계산 진행");
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료 /  다른키 누를시 다음 계산 진행)");
             String continueInput= scanner.nextLine();
             if ("exit".equals(continueInput)) {
                 break;
             }
+            resultArray.add(result);
 
-            // 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장
-            if (count < 9) {
-                resultArray[count] = result;
-                count++;
-            } else {
-                for (int i = 0; i < 9; i++) {
-                    resultArray[i] = resultArray[i + 1];
-                }
-                resultArray[9] = result;
+            for(double i: resultArray){
+                System.out.println(i);
             }
 
         }
