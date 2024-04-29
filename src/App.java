@@ -21,11 +21,20 @@ public class App {
             if ("exit".equals(continueInput)) {
                 break;
             }
-            resultArray[count] = result;
-            count += 1;
+
+            // 연산 결과가 10개를 초과하는 경우 가장 먼저 저장된 결과를 삭제하고 새로운 연산 결과가 저장
+            if (count < 9) {
+                resultArray[count] = result;
+                count++;
+            } else {
+                for (int i = 0; i < 9; i++) {
+                    resultArray[i] = resultArray[i + 1];
+                }
+                resultArray[9] = result;
+            }
+
         }
         scanner.close();
-
 
     }
 
