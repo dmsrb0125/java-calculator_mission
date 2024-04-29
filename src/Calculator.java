@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Calculator {
 
     // 컬렉션 필드
-    ArrayList<Double> resultArray = new ArrayList<>();
+    static ArrayList<Double> resultArray = new ArrayList<>();
 
     // 필드
     int num1;

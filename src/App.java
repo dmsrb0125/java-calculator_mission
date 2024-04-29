@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Double> resultArray = new ArrayList<Double>(); // 연산 결과가 10개로 고정되지 않고 무한이 저장될
         while (true){
             // getNonNegativeInteger를 통해 Scanner를 사용하여 사용자로부터 첫번째, 두번째 입력을 받고 입력값 유효성 검사 실시
             int firstNumber = getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
@@ -12,25 +11,49 @@ public class App {
 
             // isValidOperator를 통해 Scanner를 사용하여 사용자로부터 세번째 입력을 받고 입력값 유효성검사 실시
             char applyOperator = isValidOperator(scanner, "사칙연산 기호를 입력하세요(+, -, *, /):");
-            double result = calculate(firstNumber,secondNumber,applyOperator);
-            System.out.println("결과: " + result);
 
-            resultArray.add(result);
-            // remove 입력시  가장 먼저 저장된 결과가 삭제, 다른입력시 넘어감
-            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
-            String removeInput= scanner.nextLine();
-            if ("remove".equals(removeInput)) {
-                resultArray.remove(0);
+
+            // Calculator 클래스 활용
+            Calculator calculator = null;
+            try {
+                calculator = new Calculator(firstNumber, secondNumber, applyOperator);
+            } catch (InvalidCalculationException e) {
+                // 예외 처리 로직을 작성합니다.
+                System.out.println("올바르지 않은 계산이 발생했습니다: " + e.getMessage());
             }
 
-            // inquiry 입력시 저장된 연산 결과 전부를 출력, 다른입력시 넘어감
-            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
-            String getInput= scanner.nextLine();
-            if ("inquiry".equals(getInput)) {
-                for(double i: resultArray){
-                    System.out.println(i);
+            // 계산 결과를 출력합니다.
+            if (calculator != null) {
+                System.out.println("결과: " + calculator.result);
+            } else {
+                System.out.println("계산을 수행할 수 없습니다.");
+            }
+
+
+            // remove 입력 시 가장 먼저 저장된 결과가 삭제되며, 다른 입력 시 넘어갑니다.
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
+            String removeInput = scanner.nextLine();
+            if ("remove".equals(removeInput)) {
+                if (calculator != null && calculator.resultArray != null && !calculator.resultArray.isEmpty()) {
+                    calculator.resultArray.remove(0);
+                } else {
+                    System.out.println("삭제할 연산 결과가 없습니다.");
                 }
             }
+
+            // inquiry 입력 시 저장된 연산 결과 전부를 출력하며, 다른 입력 시 넘어갑니다.
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
+            String getInput = scanner.nextLine();
+            if ("inquiry".equals(getInput)) {
+                if (calculator != null && calculator.resultArray != null && !calculator.resultArray.isEmpty()) {
+                    for (double i : calculator.resultArray) {
+                        System.out.println(i);
+                    }
+                } else {
+                    System.out.println("조회할 연산 결과가 없습니다.");
+                }
+            }
+
 
 
             // exit 입력 시 종료, 다른입력시 계산 무한 반복진행
@@ -39,9 +62,6 @@ public class App {
             if ("exit".equals(continueInput)) {
                 break;
             }
-
-
-
 
         }
         scanner.close();
@@ -86,27 +106,6 @@ public class App {
                 return input.charAt(0);  // 유효한 연산자가 입력된 경우, 해당 연산자 반환
             }
             System.out.println("사칙연산자만 입력 가능합니다");
-        }
-    }
-
-    // 연산에대한 결과를 반환하는 메서드
-    public static double calculate(int num1, int num2, char operator){
-        switch (operator) {
-            case '+':
-                return num1 + num2;
-            case '-':
-                return num1 - num2;
-            case '*':
-                return num1 * num2;
-            case '/':
-                if (num2 == 0) {
-                    System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                    return Double.NaN;
-                }
-                return (double) num1 / num2;
-            default:
-                System.out.println("지원되지 않는 연산자입니다.");
-                return Double.NaN;
         }
     }
 
