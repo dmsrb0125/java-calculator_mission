@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Calculator {
 
     // 컬렉션 필드
-   static ArrayList<Double> resultArray = new ArrayList<>();
+    private static ArrayList<Double> resultArray = new ArrayList<>();
 
     // 연산에 대한 결과를 반환하는  메서드
     public double calculate(int num1, int num2, char operator) throws InvalidCalculationException{
@@ -22,6 +22,21 @@ public class Calculator {
             default:
                 throw new InvalidCalculationException("지원되지 않는 연산자 입니다: " + operator);
         }
+    }
+
+    // Getter 메서드
+    public static ArrayList<Double> getResultArray() {
+        return resultArray;
+    }
+
+    // 결과값 리스트에 저장하는 Setter 메서드
+    public  void addResultArray(double result) {
+        resultArray.add(result);
+    }
+
+    // 리스트 저장값 첫번째 요소 삭제 Setter 메서드
+    public  void removeResultArray() {
+        resultArray.remove(0);
     }
 
 

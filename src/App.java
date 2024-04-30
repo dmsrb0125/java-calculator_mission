@@ -21,20 +21,20 @@ public class App {
                 System.out.println("올바르지 않은 계산이 발생했습니다: " + e.getMessage());
             }
             System.out.println("결과: " + result);
-            calculator.resultArray.add(result);
+            calculator.addResultArray(result);
 
             // remove 입력시  가장 먼저 저장된 결과가 삭제, 다른입력시 넘어감
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
             String removeInput= scanner.nextLine();
             if ("remove".equals(removeInput)) {
-                calculator.resultArray.remove(0);
+                calculator.removeResultArray();
             }
 
             // inquiry 입력시 저장된 연산 결과 전부를 출력, 다른입력시 넘어감
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
             String getInput= scanner.nextLine();
             if ("inquiry".equals(getInput)) {
-                for(double i: calculator.resultArray){
+                for(double i: calculator.getResultArray()){
                     System.out.println(i);
                 }
             }
