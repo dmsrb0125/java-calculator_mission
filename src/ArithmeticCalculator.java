@@ -20,7 +20,7 @@ public class ArithmeticCalculator extends Calculator {
         operator = applyOperator;
     }
 
-    // 사칙연산 계산 메서드
+    // 산수연산 계산 메서드
     @Override
     public double calculate() throws InvalidCalculationException {
         switch (operator) {
@@ -32,6 +32,8 @@ public class ArithmeticCalculator extends Calculator {
                 return multiply(num1, num2);
             case '/':
                 return divide(num1, num2);
+            case '%':
+                return mod(num1, num2);
             default:
                 throw new IllegalArgumentException("Unsupported operator");
         }

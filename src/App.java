@@ -13,14 +13,14 @@ public class App {
             int select = getValidSelection(scanner);
 
             if(select==1){
-                // 사칙연산 계산 로직
+                // 산수연산 계산 로직
 
                 // getNonNegativeInteger를 통해 Scanner를 사용하여 사용자로부터 첫번째, 두번째 입력을 받고 입력값 유효성 검사 실시
                 int firstNumber = getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
                 int secondNumber = getNonNegativeInteger(scanner, "두 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
 
                 // isValidOperator를 통해 Scanner를 사용하여 사용자로부터 세번째 입력을 받고 입력값 유효성검사 실시
-                char applyOperator = isValidOperator(scanner, "사칙연산 기호를 입력하세요(+, -, *, /):");
+                char applyOperator = isValidOperator(scanner, "연산 기호를 입력하세요(+, -, *, /, %):");
 
 
                 // Calculator 클래스의 setArithmetic 메서드를 호출하여 값 설정
@@ -97,7 +97,7 @@ public class App {
     private static int getValidSelection(Scanner scanner) {
         int selection;
         while (true) {
-            System.out.print("사칙연산을 계산하려면: \"1\", 원의 넓이를 계산하려면: \"2\" 을 입력해주세요: ");
+            System.out.print("산수연산을 계산하려면: \"1\", 원의 넓이를 계산하려면: \"2\" 을 입력해주세요: ");
             if (scanner.hasNextInt()) {
                 selection = scanner.nextInt();
                 scanner.nextLine(); // 개행문자 처리
@@ -148,10 +148,10 @@ public class App {
         while (true) {
             System.out.print(prompt);
             String input = scanner.nextLine().trim();
-            if (input.length() == 1 && "+-*/".indexOf(input.charAt(0)) != -1) {
+            if (input.length() == 1 && "+-*/%".indexOf(input.charAt(0)) != -1) {
                 return input.charAt(0);  // 유효한 연산자가 입력된 경우, 해당 연산자 반환
             }
-            System.out.println("사칙연산자만 입력 가능합니다");
+            System.out.println("보기에 연산만 입력 가능합니다");
         }
     }
 
