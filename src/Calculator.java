@@ -34,7 +34,10 @@ public class Calculator {
         resultArray.add(result);
     }
 
-
+    // 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드
+    public  void removeResultArray() {
+        resultArray.remove(0);
+    }
 
 
 }
