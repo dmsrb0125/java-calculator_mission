@@ -1,34 +1,20 @@
 import java.util.ArrayList;
 
 public class Calculator {
-    // 필드
-    private static ArrayList<Double> arithmeticResultArray = new ArrayList<>();  // 사칙연산 컬렉션 필드 -> 반복문을 사용하여 객체를 매번 새로 생성하므로 static 사용하여 생명주기 문제 해결
 
-    private static ArrayList<Double> circleResultArray = new ArrayList<>();  // 원의 넓이 컬렉션 필드 -> 반복문을 사용하여 객체를 매번 새로 생성하므로 static 사용하여 생명주기 문제 해결
+    private ArrayList<Double> resultArray; // 결과를 저장할 컬렉션 필드
+    private int num1;
+    private int num2;
+    private char operator;
 
-
-    private static final double PI = 3.14; // 원주율은 고정값이니 상수로서언하고 static으로 선언함으로써, 프로그램의 어떤 부분에서든 접근할 수 있는 하나의 공유된 원주율 값만이 메모리에 저장되므로, 각 인스턴스마다 원주율 값을 별도로 저장할 필요가 없게 되어 메모리 효율을 증가시킬수있다
-
-    private int num1; // 첫번째 입력값
-    private int num2; // 두번째 입력값
-    private char operator; // 연산자
-    private  double radius; // 원의 반지름
-
-
-    // 사칙연산 계산 생성자 함수
-    public Calculator(int firstNumber, int secondNumber, char applyOperator) throws InvalidCalculationException {
-        num1 = firstNumber;
-        num2 = secondNumber;
-        operator = applyOperator;
+    // 생성자에서  배열 초기화
+    public Calculator() {
+        resultArray = new ArrayList<>();
     }
 
-    // 원의 넓이 계산 생성자 함수
-    public Calculator(double circleRadius)  {
-        radius = circleRadius;
-    }
 
-    // 사칙연산에 대한 결과를 반환하는 메서드
-    public double arithmeticCalculate() throws InvalidCalculationException{
+    // 계산 수행 메서드
+    public double calculate() throws InvalidCalculationException {
         switch (this.operator) {
             case '+':
                 return this.num1 + this.num2;
@@ -46,56 +32,34 @@ public class Calculator {
         }
     }
 
-    // 사칙연산 저장값 Getter 메서드
-    public static ArrayList<Double> arithmeticGetResultArray() {
-        return arithmeticResultArray;
+    // Setter 메서드 -> 객체생성을 반복문 밖에 하였고 해당 입력은 반복로직을 통해 입력을 받기때문에 초기 생성자 초기화가아닌 세터를 통한 초기화 사용
+    public void setValues(int firstNumber, int secondNumber, char applyOperator)  {
+        num1 = firstNumber;
+        num2 = secondNumber;
+        operator = applyOperator;
     }
 
-    // 사칙연산 결과값 리스트에 저장하는 Setter 메서드
-    public  void arithmeticAddResultArray(double result) {
-        arithmeticResultArray.add(result);
+
+    // Getter 메서드
+    public ArrayList<Double> getResultArray() {
+        return resultArray;
     }
 
-    // 사칙연산 결과 저장 리스트에서 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드
-    public void arithmeticRemoveResultArray() {
-        arithmeticResultArray.remove(0);
+    // 결과값 리스트에 저장하는 메서드
+    public void addResultArray(double result) {
+        resultArray.add(result);
     }
 
-    // 사칙연산 결과 저장 리스트에 저장된 연산 결과들을 조회하는 기능을 가진 메서드
-    public void arithmeticInquiryResultArray(){
-        for(double i: arithmeticResultArray){
+    // 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드
+    public void removeResultArray() {
+        resultArray.remove(0);
+    }
+
+    //저장된 연산 결과들을 조회하는 기능을 가진 메서드
+    public void inquiryResultArray(){
+        for(double i: resultArray){
             System.out.println(i);
         }
     }
-
-
-    // 원의 넓이를 구하는 메서드
-    public double circleCalculate() {
-        return PI * radius * radius;
-    }
-
-    // 원의 넓이 저장값 Getter 메서드
-    public static ArrayList<Double> circleGetResultArray() {
-        return circleResultArray;
-    }
-
-    // 원의 넓이 결과값 리스트에 저장하는 Setter 메서드
-    public  void circleAddResultArray(double result) {
-        circleResultArray.add(result);
-    }
-
-
-    // 원의 넓이 결과 저장 리스트에서 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드
-    public void circleRemoveResultArray(){
-        circleResultArray.remove(0);
-    }
-
-    // 원의 넓이 결과 저장 리스트에 저장된 연산 결과들을 조회하는 기능을 가진 메서드
-    public void circleInquiryResultArray(){
-        for(double i: circleResultArray){
-            System.out.println(i);
-        }
-    }
-
 
 }
