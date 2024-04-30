@@ -13,10 +13,15 @@ public class App {
 
 
             // Calculator 클래스 활용
-            Calculator calculator = new Calculator();
+            Calculator calculator = null;
+            try {
+                calculator = new Calculator(firstNumber,secondNumber,applyOperator);
+            } catch (InvalidCalculationException e) {
+                System.out.println("올바르지 않은 계산이 발생했습니다: " + e.getMessage());
+            }
             double result = 0;
             try {
-                result = calculator.calculate(firstNumber,secondNumber,applyOperator);
+                result = calculator.calculate();
             } catch (InvalidCalculationException e) {
                 System.out.println("올바르지 않은 계산이 발생했습니다: " + e.getMessage());
             }

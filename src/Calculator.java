@@ -5,22 +5,35 @@ public class Calculator {
     // 컬렉션 필드
     private static ArrayList<Double> resultArray = new ArrayList<>();
 
-    // 연산에 대한 결과를 반환하는  메서드
-    public double calculate(int num1, int num2, char operator) throws InvalidCalculationException{
-        switch (operator) {
+    // 필드
+    private int num1;
+    private int num2;
+    private char operator;
+
+
+    // 생성자 함수
+    public Calculator(int firstNumber, int secondNumber, char applyOperator) throws InvalidCalculationException {
+        num1 = firstNumber;
+        num2 = secondNumber;
+        operator = applyOperator;
+    }
+
+    // 연산에 대한 결과를 반환하는 내부 메서드
+    public double calculate() throws InvalidCalculationException{
+        switch (this.operator) {
             case '+':
-                return num1 +num2;
+                return this.num1 + this.num2;
             case '-':
-                return num1 - num2;
+                return this.num1 - this.num2;
             case '*':
-                return num1 * num2;
+                return this.num1 * this.num2;
             case '/':
-                if (num2 == 0) {
+                if (this.num2 == 0) {
                     throw new InvalidCalculationException("나눗셈 연산에서 분모(두번째 정수)에 0을 사용할 수 없습니다.");
                 }
-                return (double) num1 /num2;
+                return (double) this.num1 / this.num2;
             default:
-                throw new InvalidCalculationException("지원되지 않는 연산자 입니다: " + operator);
+                throw new InvalidCalculationException("지원되지 않는 연산자 입니다: " + this.operator);
         }
     }
 
