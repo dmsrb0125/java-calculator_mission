@@ -4,11 +4,11 @@ import validation.InvalidCalculationException;
 
 import java.util.ArrayList;
 
-public class ArithmeticCalculator extends Calculator {
+public class ArithmeticCalculator<T extends Number> extends Calculator<T> {
     // 필드
     private ArrayList<Double> resultArray;
-    private int num1;
-    private int num2;
+    private T num1;
+    private T num2;
     private Operator operator;  // 타입을 Operator 이넘으로 선언
 
     // 생성자
@@ -18,11 +18,12 @@ public class ArithmeticCalculator extends Calculator {
 
 
     // 세터
-    public void setValues(int firstNumber, int secondNumber, char applyOperator) {
+    public void setValues(T firstNumber, T secondNumber, char applyOperator) {
         num1 = firstNumber;
         num2 = secondNumber;
-        operator = Operator.fromChar(applyOperator);  // char를 Operator 이넘으로 변환
+        operator = Operator.fromChar(applyOperator);
     }
+
 
     // 산수연산 계산 메서드
     @Override

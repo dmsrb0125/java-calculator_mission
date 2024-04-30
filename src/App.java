@@ -29,8 +29,8 @@ public class App {
     // 선택된 계산기 유형에 따라 적절한 계산을 수행하고 결과를 관리하는 메서드.
     private static void performCalculation(Scanner scanner, Calculator calculator) {
         if (calculator instanceof ArithmeticCalculator) {
-            int firstNumber = InputValidator.getNonNegativeInteger(scanner, "첫 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
-            int secondNumber = InputValidator.getNonNegativeInteger(scanner, "두 번째 숫자를 입력해주세요(양의 정수 또는 0만 입력 가능합니다): ");
+            double firstNumber = InputValidator.getDouble(scanner, "첫 번째 숫자를 입력해주세요: ");
+            double secondNumber = InputValidator.getDouble(scanner, "두 번째 숫자를 입력해주세요: ");
             char applyOperator = InputValidator.isValidOperator(scanner, "연산 기호를 입력하세요(+, -, *, /, %):");
             ((ArithmeticCalculator) calculator).setValues(firstNumber, secondNumber, applyOperator);
         } else if (calculator instanceof CircleCalculator) {
@@ -40,7 +40,7 @@ public class App {
 
         try {
             double result = calculator.calculate();
-            System.out.println("결과: " +result);
+            System.out.printf("결과: %.2f\n", result);
             calculator.addResult(result);
         } catch (InvalidCalculationException e) {
             System.out.println("올바르지 않은 계산이 발생했습니다: " + e.getMessage());

@@ -22,7 +22,7 @@ public class InputValidator {
         }
     }
 
-    public static int getNonNegativeInteger(Scanner scanner, String prompt) {
+    public static double getDouble(Scanner scanner, String prompt) {
         while (true) {
             System.out.print(prompt);
             String input = scanner.nextLine().trim();
@@ -31,14 +31,10 @@ public class InputValidator {
                 continue;
             }
             try {
-                int number = Integer.parseInt(input);
-                if (number < 0) {
-                    System.out.println("양의 정수 또는 0만 입력 가능합니다.");
-                    continue;
-                }
-                return number;
+                double number = Double.parseDouble(input);
+                return number; // 모든 실수 입력을 받아들임
             } catch (NumberFormatException e) {
-                System.out.println("정수 형태로 입력해주세요.");
+                System.out.println("실수 형태로 입력해주세요.");
             }
         }
     }
