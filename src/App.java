@@ -24,7 +24,7 @@ public class App {
 
             // 계산 결과를 출력합니다.
             if (calculator != null) {
-                System.out.println("결과: " + calculator.result);
+                System.out.println("결과: " + calculator.getResult());
             } else {
                 System.out.println("계산을 수행할 수 없습니다.");
             }
@@ -34,8 +34,8 @@ public class App {
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
             String removeInput = scanner.nextLine();
             if ("remove".equals(removeInput)) {
-                if (calculator != null && calculator.resultArray != null && !calculator.resultArray.isEmpty()) {
-                    calculator.resultArray.remove(0);
+                if (calculator != null && calculator.getResultArray() != null && !calculator.getResultArray().isEmpty()) {
+                    calculator.getResultArray().remove(0);
                 } else {
                     System.out.println("삭제할 연산 결과가 없습니다.");
                 }
@@ -45,8 +45,8 @@ public class App {
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
             String getInput = scanner.nextLine();
             if ("inquiry".equals(getInput)) {
-                if (calculator != null && calculator.resultArray != null && !calculator.resultArray.isEmpty()) {
-                    for (double i : calculator.resultArray) {
+                if (calculator != null && calculator.getResultArray() != null && !calculator.getResultArray().isEmpty()) {
+                    for (double i : calculator.getResultArray()) {
                         System.out.println(i);
                     }
                 } else {
