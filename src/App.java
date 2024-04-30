@@ -3,11 +3,14 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Calculator calculator = new Calculator();
+
+        // 계산기 인스턴스 생성
+        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+        CircleCalculator circleCalculator = new CircleCalculator();
 
         while (true){
             // 계산 선택 로직
-            int select = getValidSelection(scanner, "사칙연산을 계산하려면: \"1\", 원의 넓이를 계산하려면: \"2\" 을 입력해주세요: ");
+            int select = getValidSelection(scanner);
 
             if(select==1){
                 // 사칙연산 계산 로직
@@ -21,13 +24,13 @@ public class App {
 
 
                 // Calculator 클래스의 setArithmetic 메서드를 호출하여 값 설정
-                calculator.setArithmetic(firstNumber, secondNumber, applyOperator);
+                arithmeticCalculator.setValues(firstNumber, secondNumber, applyOperator);
 
                 // 계산 수행 및 결과 출력
                 try {
-                    double result = calculator.arithmeticCalculate();
+                    double result = arithmeticCalculator.calculate();
                     System.out.println("결과: " + result);
-                    calculator.arithmeticAddResultArray(result); // 결과를 결과 배열에 추가
+                    arithmeticCalculator.addResult(result); // 결과를 결과 배열에 추가
                 } catch (InvalidCalculationException e) {
                     System.out.println("올바르지 않은 계산이 발생했습니다: " + e.getMessage());
                 }
@@ -36,7 +39,7 @@ public class App {
                 System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
                 String removeInput= scanner.nextLine();
                 if ("remove".equals(removeInput)) {
-                    calculator.arithmeticRemoveResultArray();
+                    arithmeticCalculator.removeResult();
                 }
 
 
@@ -44,27 +47,27 @@ public class App {
                 System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
                 String getInput= scanner.nextLine();
                 if ("inquiry".equals(getInput)) {
-                    calculator.arithmeticInquiryResultArray();
+                    arithmeticCalculator.inquiryResult();
                 }
 
 
             }else{
                 // 원의 넓이 계산 로직
-                double circleRadius =  getPositiveDouble(scanner, "반지름을 입력하세요(cm): ");
+                double circleRadius =  getPositiveDouble(scanner);
 
                 // Calculator 클래스의 setArithmetic 메서드를 호출하여 값 설정
-                calculator.setCircle(circleRadius);
+                circleCalculator.setRadius(circleRadius);
 
                 // 계산 수행 및 결과 출력
-                double result = calculator.circleCalculate();
+                double result = circleCalculator.calculate();
                 System.out.println("결과: " + result + " cm²");
-                calculator.circleAddResultArray(result);
+                circleCalculator.addResult(result);
 
                 // remove 입력시  가장 먼저 저장된 결과가 삭제, 다른입력시 넘어감
                 System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
                 String removeInput= scanner.nextLine();
                 if ("remove".equals(removeInput)) {
-                    calculator.circleRemoveResultArray();
+                    circleCalculator.removeResult();
                 }
 
 
@@ -72,7 +75,7 @@ public class App {
                 System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
                 String getInput= scanner.nextLine();
                 if ("inquiry".equals(getInput)) {
-                    calculator.circleInquiryResultArray();
+                    circleCalculator.inquiryResult();
                 }
             }
 
@@ -91,10 +94,10 @@ public class App {
     }
 
     // 선택 입력값 유효성 검사 후 반환하는 메서드
-    private static int getValidSelection(Scanner scanner, String prompt) {
+    private static int getValidSelection(Scanner scanner) {
         int selection;
         while (true) {
-            System.out.print(prompt);
+            System.out.print("사칙연산을 계산하려면: \"1\", 원의 넓이를 계산하려면: \"2\" 을 입력해주세요: ");
             if (scanner.hasNextInt()) {
                 selection = scanner.nextInt();
                 scanner.nextLine(); // 개행문자 처리
@@ -145,7 +148,7 @@ public class App {
         while (true) {
             System.out.print(prompt);
             String input = scanner.nextLine().trim();
-            if (!input.isEmpty() && input.length() == 1 && "+-*/".indexOf(input.charAt(0)) != -1) {
+            if (input.length() == 1 && "+-*/".indexOf(input.charAt(0)) != -1) {
                 return input.charAt(0);  // 유효한 연산자가 입력된 경우, 해당 연산자 반환
             }
             System.out.println("사칙연산자만 입력 가능합니다");
@@ -153,9 +156,9 @@ public class App {
     }
 
     // 반지름 입력값 유효성 검사후 반환하는 메서드
-    private static double getPositiveDouble(Scanner scanner, String prompt) {
+    private static double getPositiveDouble(Scanner scanner) {
         while (true) {
-            System.out.print(prompt);
+            System.out.print("반지름을 입력하세요(cm): ");
             String input = scanner.nextLine().trim();  // 입력값 앞뒤 공백 제거
 
             // 입력값이 없을 때 입력 다시 받기
