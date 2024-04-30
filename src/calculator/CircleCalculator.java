@@ -11,6 +11,7 @@ public class CircleCalculator extends Calculator {
 
     // 생성자
     public CircleCalculator() {
+
         resultArray = new ArrayList<>();
     }
 

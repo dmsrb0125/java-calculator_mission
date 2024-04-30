@@ -9,7 +9,7 @@ public class ArithmeticCalculator extends Calculator {
     private ArrayList<Double> resultArray;
     private int num1;
     private int num2;
-    private char operator;
+    private Operator operator;  // 타입을 Operator 이넘으로 선언
 
     // 생성자
     public ArithmeticCalculator() {
@@ -21,27 +21,15 @@ public class ArithmeticCalculator extends Calculator {
     public void setValues(int firstNumber, int secondNumber, char applyOperator) {
         num1 = firstNumber;
         num2 = secondNumber;
-        operator = applyOperator;
+        operator = Operator.fromChar(applyOperator);  // char를 Operator 이넘으로 변환
     }
 
     // 산수연산 계산 메서드
     @Override
     public double calculate() throws InvalidCalculationException {
-        switch (operator) {
-            case '+':
-                return add(num1, num2);
-            case '-':
-                return subtract(num1, num2);
-            case '*':
-                return multiply(num1, num2);
-            case '/':
-                return divide(num1, num2);
-            case '%':
-                return mod(num1, num2);
-            default:
-                throw new IllegalArgumentException("Unsupported operator");
-        }
+        return operator.apply(num1, num2);
     }
+
     // 게터
     @Override
     public ArrayList<Double> getResultArray() {
@@ -69,4 +57,5 @@ public class ArithmeticCalculator extends Calculator {
             System.out.println(result);
         }
     }
+
 }
