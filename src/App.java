@@ -24,21 +24,23 @@ public class App {
             calculator.addResultArray(result);
 
             // remove 입력시  가장 먼저 저장된 결과가 삭제, 다른입력시 넘어감
+            /*
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
             String removeInput= scanner.nextLine();
             if ("remove".equals(removeInput)) {
-                calculator.removeResultArray();
+                calculator.resultArray.remove(0);
             }
+
 
             // inquiry 입력시 저장된 연산 결과 전부를 출력, 다른입력시 넘어감
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
             String getInput= scanner.nextLine();
             if ("inquiry".equals(getInput)) {
-                for(double i: calculator.getResultArray()){
+                for(double i: calculator.resultArray){
                     System.out.println(i);
                 }
             }
-
+            */
 
             // exit 입력 시 종료, 다른입력시 계산 무한 반복진행
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료 /  다른키 누를시 다음 계산 진행)");

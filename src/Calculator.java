@@ -34,10 +34,7 @@ public class Calculator {
         resultArray.add(result);
     }
 
-    // 리스트 저장값 첫번째 요소 삭제 Setter 메서드
-    public  void removeResultArray() {
-        resultArray.remove(0);
-    }
+
 
 
 }
