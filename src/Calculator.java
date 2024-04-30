@@ -35,9 +35,14 @@ public class Calculator {
     }
 
     // 가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드
-    public  void removeResultArray() {
+    public void removeResultArray() {
         resultArray.remove(0);
     }
 
-
+    //저장된 연산 결과들을 조회하는 기능을 가진 메서드
+    public void inquiryResultArray(){
+        for(double i: resultArray){
+            System.out.println(i);
+        }
+    }
 }
