@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -14,46 +13,31 @@ public class App {
 
 
             // Calculator 클래스 활용
-            Calculator calculator = null;
+            Calculator calculator = new Calculator();
+            double result = 0;
             try {
-                calculator = new Calculator(firstNumber, secondNumber, applyOperator);
+                result = calculator.calculate(firstNumber,secondNumber,applyOperator);
             } catch (InvalidCalculationException e) {
-                // 예외 처리 로직을 작성합니다.
                 System.out.println("올바르지 않은 계산이 발생했습니다: " + e.getMessage());
             }
+            System.out.println("결과: " + result);
+            calculator.resultArray.add(result);
 
-            // 계산 결과를 출력합니다.
-            if (calculator != null) {
-                System.out.println("결과: " + calculator.getResult());
-            } else {
-                System.out.println("계산을 수행할 수 없습니다.");
-            }
-
-
-            // remove 입력 시 가장 먼저 저장된 결과가 삭제되며, 다른 입력 시 넘어갑니다.
+            // remove 입력시  가장 먼저 저장된 결과가 삭제, 다른입력시 넘어감
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
-            String removeInput = scanner.nextLine();
+            String removeInput= scanner.nextLine();
             if ("remove".equals(removeInput)) {
-                if (calculator != null && calculator.getResultArray() != null && !calculator.getResultArray().isEmpty()) {
-                    calculator.getResultArray().remove(0);
-                } else {
-                    System.out.println("삭제할 연산 결과가 없습니다.");
-                }
+                calculator.resultArray.remove(0);
             }
 
-            // inquiry 입력 시 저장된 연산 결과 전부를 출력하며, 다른 입력 시 넘어갑니다.
+            // inquiry 입력시 저장된 연산 결과 전부를 출력, 다른입력시 넘어감
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
-            String getInput = scanner.nextLine();
+            String getInput= scanner.nextLine();
             if ("inquiry".equals(getInput)) {
-                if (calculator != null && calculator.getResultArray() != null && !calculator.getResultArray().isEmpty()) {
-                    for (double i : calculator.getResultArray()) {
-                        System.out.println(i);
-                    }
-                } else {
-                    System.out.println("조회할 연산 결과가 없습니다.");
+                for(double i: calculator.resultArray){
+                    System.out.println(i);
                 }
             }
-
 
 
             // exit 입력 시 종료, 다른입력시 계산 무한 반복진행
