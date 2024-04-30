@@ -106,10 +106,10 @@ Level1 부터 Level3 까지 각각의 레벨별로 요구사항에 맞는 계산
   - [x] 구현한 클래스들을 활용하여 오류가 발생하지 않고 활용될 수 있도록 수정 
 
 #### 요구사항 9번
-- [ ] ArithmeticCalculator 클래스의 연산 메서드에 책임(역할)이 많아 보입니다. 사칙연산 각각의 기능을 담당하는 AddOperator, SubtractOperator, MultiplyOperator, DivideOperator 클래스를 만들어 연산 메서드의 책임을 분리 해봅니다. (SRP)
-  - [ ] Calculator 클래스에 사칙연산 클래스들을 활용. (포함 관계)
-  - [ ] 사칙연산 클래스들을 초기화 해야하는데 이때, 반드시 생성자를 활용
-  - [ ] ArithmeticCalculator 클래스의 연산 메서드를 수정 하더라도 이전과 똑같이 동작해야합니다.
+- [x] ArithmeticCalculator 클래스의 연산 메서드에 책임(역할)이 많아 보입니다. 사칙연산 각각의 기능을 담당하는 AddOperator, SubtractOperator, MultiplyOperator, DivideOperator 클래스를 만들어 연산 메서드의 책임을 분리 해봅니다. (SRP)
+  - [x] Calculator 클래스에 사칙연산 클래스들을 활용. (포함 관계)
+  - [x] 사칙연산 클래스들을 초기화 해야하는데 이때, 반드시 생성자를 활용
+  - [x] ArithmeticCalculator 클래스의 연산 메서드를 수정 하더라도 이전과 똑같이 동작해야합니다.
 
 #### 요구사항 10번
 - [ ] ArithmeticCalculator 클래스에 추가로 나머지 연산(%) 기능을 추가하기 위해 ModOperator 클래스를 만들어 추가합니다

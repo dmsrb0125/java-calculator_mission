@@ -9,12 +9,12 @@ public class CircleCalculator extends Calculator {
 
     // 생성자
     public CircleCalculator() {
-        this.resultArray = new ArrayList<>();
+        resultArray = new ArrayList<>();
     }
 
     // 세터
-    public void setRadius(double radius) {
-        this.radius = radius;
+    public void setRadius(double circleRadius ) {
+        radius = circleRadius ;
     }
 
     // 원의 넓이 계산 메서드

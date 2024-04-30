@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class ArithmeticCalculator extends Calculator {
-
     // 필드
     private ArrayList<Double> resultArray;
     private int num1;
@@ -13,36 +12,30 @@ public class ArithmeticCalculator extends Calculator {
         this.resultArray = new ArrayList<>();
     }
 
+
     // 세터
     public void setValues(int firstNumber, int secondNumber, char applyOperator) {
-        this.num1 = firstNumber;
-        this.num2 = secondNumber;
-        this.operator = applyOperator;
+        num1 = firstNumber;
+        num2 = secondNumber;
+        operator = applyOperator;
     }
-
-
 
     // 사칙연산 계산 메서드
     @Override
     public double calculate() throws InvalidCalculationException {
         switch (operator) {
             case '+':
-                return num1 + num2;
+                return add(num1, num2);
             case '-':
-                return num1 - num2;
+                return subtract(num1, num2);
             case '*':
-                return num1 * num2;
+                return multiply(num1, num2);
             case '/':
-                if (num2 == 0) {
-                    throw new InvalidCalculationException("Division by zero is not allowed.");
-                }
-                return (double) num1 / num2;
+                return divide(num1, num2);
             default:
-                throw new InvalidCalculationException("Unsupported operator: " + operator);
+                throw new IllegalArgumentException("Unsupported operator");
         }
     }
-
-
     // 게터
     @Override
     public ArrayList<Double> getResultArray() {
