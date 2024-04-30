@@ -1,3 +1,5 @@
+package operator;
+
 public class DivideOperator implements Operator {
     public double operate(int num1, int num2) {
         if (num2 == 0) {

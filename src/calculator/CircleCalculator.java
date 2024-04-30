@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+package calculator;
 
+import java.util.ArrayList;
+import validation.InvalidCalculationException;
 public class CircleCalculator extends Calculator {
 
     //필드
@@ -19,8 +21,11 @@ public class CircleCalculator extends Calculator {
 
     // 원의 넓이 계산 메서드
     @Override
-    public double calculate() {
-        return PI * radius * radius;
+    public double calculate() throws InvalidCalculationException {
+        if (radius <= 0) {
+            throw new InvalidCalculationException("반지름은 양수만 입력 할 수 있습니다");
+        }
+        return Math.PI * radius * radius; // 원의 넓이 계산
     }
 
     // 게터

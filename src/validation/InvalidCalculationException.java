@@ -1,4 +1,6 @@
-class InvalidCalculationException extends Exception {
+package validation;
+
+public class InvalidCalculationException extends Exception {
     public InvalidCalculationException(String message) {
         super(message);
     }

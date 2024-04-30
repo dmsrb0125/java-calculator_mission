@@ -1,3 +1,7 @@
+package calculator;
+
+import validation.InvalidCalculationException;
+
 import java.util.ArrayList;
 
 public class ArithmeticCalculator extends Calculator {
