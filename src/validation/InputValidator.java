@@ -6,18 +6,21 @@ public class InputValidator {
 
     public static int getValidSelection(Scanner scanner, String prompt) {
         while (true) {
-            System.out.print("산수연산을 계산하려면: \"1\", 원의 넓이를 계산하려면: \"2\" 을 입력해주세요: ");
-            if (scanner.hasNextInt()) {
-                int selection = scanner.nextInt();
-                scanner.nextLine(); // 개행문자 처리
-                if (selection == 1 || selection == 2) {
-                    return selection;
-                } else {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("입력이 없습니다. 다시 입력해주세요.");
+                continue;
+            }
+            try {
+                int selection = Integer.parseInt(input);
+                if (selection != 1 && selection != 2) {
                     System.out.println("잘못된 입력입니다. 1 또는 2만 입력 가능합니다.");
+                    continue;
                 }
-            } else {
+                return selection;
+            } catch (NumberFormatException e) {
                 System.out.println("숫자를 입력해야 합니다. 1 또는 2를 입력하세요.");
-                scanner.nextLine(); // 잘못된 입력을 비우기
             }
         }
     }
