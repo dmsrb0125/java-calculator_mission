@@ -58,5 +58,10 @@ public class ArithmeticCalculator<T extends Number> extends Calculator<T> {
             System.out.println(result);
         }
     }
-
+    // 저장된 결과 중 사용자가 지정한 값보다 큰 결과를 조회
+    public void printResultsGreaterThan(double threshold) {
+        resultArray.stream()
+                .filter(result -> result > threshold)
+                .forEach(System.out::println);
+    }
 }

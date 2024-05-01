@@ -21,9 +21,7 @@ public class App {
                 performCalculation(scanner, circleCalculator);
             }
 
-            if (!continueCalculating(scanner)) break;
         }
-        scanner.close();
     }
 
     // 선택된 계산기 유형에 따라 적절한 계산을 수행하고 결과를 관리하는 메서드.
@@ -49,23 +47,52 @@ public class App {
         manageResults(scanner, calculator);
     }
 
-    // 추가로직 메서드로 분리
+    // 추가로직 메서드로 통합 분리
     private static void manageResults(Scanner scanner, Calculator calculator) {
-        System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제 / 다른키 누를시 넘어감)");
-        if ("remove".equals(scanner.nextLine())) {
-            calculator.removeResult();
-        }
+        while (true) {
+            if (calculator instanceof ArithmeticCalculator) {
+                System.out.println("로직이 완료되었습니다. 저장된 값 관리 또는 계산을 종료 시킬 수 있습니다:(다른키 누를시 계산 재실행)");
+                System.out.println("  'inquiry' - 모든 결과 조회");
+                System.out.println("  'bigger'  - 지정된 값 이상의 결과 조회");
+                System.out.println("  'remove'  - 가장 오래된 결과 삭제");
+                System.out.println("  'exit'  - 계산 종료");
+            } else if (calculator instanceof CircleCalculator) {
+                System.out.println("로직이 완료되었습니다. 저장된 값 관리 또는 계산을 종료 시킬 수 있습니다:(다른키 누를시 계산 재실행)");
+                System.out.println("  'inquiry' - 모든 결과 조회");
+                System.out.println("  'remove'  - 가장 오래된 결과 삭제");
+                System.out.println("  'exit'  - 계산 종료");
+            }
 
-        System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회 / 다른키 누를시 넘어감)");
-        if ("inquiry".equals(scanner.nextLine())) {
-            calculator.inquiryResult();
+
+            String action = scanner.nextLine().trim().toLowerCase();
+
+            switch (action) {
+                case "remove":
+                    calculator.removeResult();
+                    System.out.println("결과가 삭제되었습니다.");
+                    break;  // 작업 수행 후 다시 메뉴로
+                case "inquiry":
+                    calculator.inquiryResult();
+                    break;  // 작업 수행 후 다시 메뉴로
+                case "bigger":
+                    if (calculator instanceof ArithmeticCalculator) {
+                        System.out.print("기준 값 입력: ");
+                        double threshold = scanner.nextDouble();
+                        scanner.nextLine();  // 개행문자 처리
+                        ((ArithmeticCalculator) calculator).printResultsGreaterThan(threshold);
+                    } else {
+                        System.out.println("이 기능은 산술 연산기에서만 사용 가능합니다.");
+                    }
+                    break;  // 작업 수행 후 다시 메뉴로
+                case "exit":
+                    System.out.println("프로그램을 종료합니다.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    return;
+            }
         }
     }
 
-    // 계산 진행 여부확인 메서드로 분리
-    private static boolean continueCalculating(Scanner scanner) {
-        System.out.println("더 계산하시겠습니까? (exit 입력 시 종료 / 다른키 누를시 다음 계산 진행)");
-        String continueInput = scanner.nextLine();
-        return !"exit".equals(continueInput);
-    }
+
 }
